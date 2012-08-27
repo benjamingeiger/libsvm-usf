@@ -1,0 +1,41 @@
+Modifications to regular libSVM 3.11 library:
+
+eval.h, eval.cpp added to help optimize over criteria other than accuracy.
+
+In eval.cpp,
+
+	double (*validation_function)(const dvec_t&, const ivec_t&) = auc;
+	controls the optimization criteria. Options are:
+	--accuracy
+	--auc
+	--bac
+	--recall
+	--precision
+	--fscore
+Have to recompile libSVM each time this is changed. 
+
+In svm-predict.c, 
+
+	#include "eval.h" is added.
+
+	In main(),
+		-->predict(input,output); is replaced by --> binary_class_predict(input, output);
+
+In svm-train.c, 
+
+	#include "eval.h" is added.
+
+	In main(),
+	
+		-->do_cross_validation(); is replaced by,
+		-->double cv =  binary_class_cross_validation(&prob, &param, nr_fold);
+			printf("Cross Validation = %g%%\n",100.0*cv);
+
+	To change the seed value for Cross Validation for multiple iterations,
+
+	#include <time.h> is added.
+	In main(), srand(time(0)); is added.
+
+In grid.py,
+
+	accuracy is replaced by auc in the display.

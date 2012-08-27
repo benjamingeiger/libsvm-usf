@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include "svm.h"
+#include "eval.h"
 
 struct svm_node *x;
 int max_nr_attr = 64;
@@ -219,7 +220,9 @@ int main(int argc, char **argv)
 		if(svm_check_probability_model(model)!=0)
 			printf("Model supports probability estimates, but disabled in prediction.\n");
 	}
-	predict(input,output);
+//	predict(input,output);
+	binary_class_predict(input, output); //Modified
+
 	svm_free_and_destroy_model(&model);
 	free(x);
 	free(line);

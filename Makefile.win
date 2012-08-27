@@ -11,10 +11,10 @@ TARGET = windows
 all: $(TARGET)\svm-train.exe $(TARGET)\svm-predict.exe $(TARGET)\svm-scale.exe $(TARGET)\svm-toy.exe lib
 
 $(TARGET)\svm-predict.exe: svm.h svm-predict.c svm.obj
-	$(CXX) $(CFLAGS) svm-predict.c svm.obj -Fe$(TARGET)\svm-predict.exe
+	$(CXX) $(CFLAGS) eval.cpp svm-predict.c svm.obj -Fe$(TARGET)\svm-predict.exe
 
 $(TARGET)\svm-train.exe: svm.h svm-train.c svm.obj
-	$(CXX) $(CFLAGS) svm-train.c svm.obj -Fe$(TARGET)\svm-train.exe
+	$(CXX) $(CFLAGS) eval.cpp svm-train.c svm.obj -Fe$(TARGET)\svm-train.exe
 
 $(TARGET)\svm-scale.exe: svm.h svm-scale.c
 	$(CXX) $(CFLAGS) svm-scale.c -Fe$(TARGET)\svm-scale.exe

@@ -3,7 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <time.h>
 #include "svm.h"
+#include "eval.h"
+
 #define Malloc(type,n) (type *)malloc((n)*sizeof(type))
 
 void print_null(const char *s) {}
@@ -85,6 +88,7 @@ int main(int argc, char **argv)
 	char input_file_name[1024];
 	char model_file_name[1024];
 	const char *error_msg;
+	//srand(time(0));
 
 	parse_command_line(argc, argv, input_file_name, model_file_name);
 	read_problem(input_file_name);
@@ -98,7 +102,11 @@ int main(int argc, char **argv)
 
 	if(cross_validation)
 	{
-		do_cross_validation();
+		
+//	do_cross_validation();
+	double cv =  binary_class_cross_validation(&prob, &param, nr_fold);
+		printf("Cross Validation = %g%%\n",100.0*cv); //Modified
+
 	}
 	else
 	{

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-
-
 import os, sys, traceback
 import getpass
 from threading import Thread
@@ -21,9 +19,9 @@ if not is_win32:
        gnuplot_exe = "/usr/bin/gnuplot"
 else:
        # example for windows
-       svmtrain_exe = r"..\windows\svm-train.exe"
+       svmtrain_exe = r"C:\Users\jkorecki\Desktop\satmanredo\myGo\libsvm-3.11_modified\windows\svm-train.exe"
        # svmtrain_exe = r"c:\Program Files\libsvm\windows\svm-train.exe" 
-       gnuplot_exe = r"c:\tmp\gnuplot\binary\pgnuplot.exe"
+       gnuplot_exe = r"C:\Program Files (x86)\gnuplot\bin\gnuplot.exe"
 
 # global parameters and their default values
 
@@ -95,6 +93,7 @@ Usage: grid.py [-log2c begin,end,step] [-log2g begin,end,step] [-v fold]
         i = i + 1
 
     pass_through_string = " ".join(pass_through_options)
+    print svmtrain_exe
     assert os.path.exists(svmtrain_exe),"svm-train executable not found"    
     assert os.path.exists(gnuplot_exe),"gnuplot executable not found"
     assert os.path.exists(dataset_pathname),"dataset not found"
@@ -159,7 +158,7 @@ def redraw(db,best_param,tofile=False):
     gnuplot.write(b"set view 0,0\n")
     gnuplot.write("set title \"{0}\"\n".format(dataset_title).encode())
     gnuplot.write(b"unset label\n")
-    gnuplot.write("set label \"Best log2(C) = {0}  log2(gamma) = {1}  accuracy = {2}%\" \
+    gnuplot.write("set label \"Best log2(C) = {0}  log2(gamma) = {1}  auc = {2}\" \
                   at screen 0.5,0.85 center\n". \
                   format(best_log2c, best_log2g, best_rate).encode())
     gnuplot.write("set label \"C = {0}  gamma = {1}\""
@@ -246,6 +245,7 @@ class LocalWorker(Worker):
         result = Popen(cmdline,shell=True,stdout=PIPE).stdout
         for line in result.readlines():
             if str(line).find("Cross") != -1:
+                print line
                 return float(line.split()[-1][0:-1])
 
 class SSHWorker(Worker):
