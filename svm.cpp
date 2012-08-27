@@ -3110,3 +3110,12 @@ void svm_set_print_string_function(void (*print_func)(const char *))
 	else
 		svm_print_string = print_func;
 }
+
+
+
+
+/* Added by Benjamin Geiger, for Python */
+void svm_set_random_seed(unsigned int seed)
+{
+    srand(seed);
+}
