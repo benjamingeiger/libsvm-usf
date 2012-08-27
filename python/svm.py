@@ -67,6 +67,9 @@ def gen_svm_nodearray(xi, feature_max=None, isKernel=None):
 		max_idx = index_range[-1]
 	return ret, max_idx
 
+def set_random_seed(seed):
+	libsvm.svm_set_random_seed(seed)
+
 class svm_problem(Structure):
 	_names = ["l", "y", "x"]
 	_types = [c_int, POINTER(c_double), POINTER(POINTER(svm_node))]
@@ -289,3 +292,5 @@ fillprototype(libsvm.svm_destroy_param, None, [POINTER(svm_parameter)])
 fillprototype(libsvm.svm_check_parameter, c_char_p, [POINTER(svm_problem), POINTER(svm_parameter)])
 fillprototype(libsvm.svm_check_probability_model, c_int, [POINTER(svm_model)])
 fillprototype(libsvm.svm_set_print_string_function, None, [PRINT_STRING_FUN])
+
+fillprototype(libsvm.svm_set_random_seed, None, [c_int])

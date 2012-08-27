@@ -2,6 +2,15 @@
 
 from svm import *
 
+def svm_set_random_seed(seed):
+	"""
+	svm_set_random_seed(seed) -> None
+
+	Set the seed used for cross validation in the LIBSVM library.
+	"""
+
+	libsvm.svm_set_random_seed(seed)
+
 def svm_read_problem(data_file_name):
 	"""
 	svm_read_problem(data_file_name) -> [y, x]
