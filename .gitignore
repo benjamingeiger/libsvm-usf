@@ -1,0 +1,81 @@
+svm-predict
+svm-scale
+svm-train
+libsvm.so.2
+
+######################################################################
+# Global ignore patterns
+######################################################################
+
+# Mac turds
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows turds
+Thumbs.db
+Desktop.ini
+
+# vim turds
+*~
+.*.swp
+
+# emacs turds
+\#*\#
+
+######################################################################
+# Python-specific ignore patterns
+######################################################################
+
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+#Translations
+*.mo
+
+#Mr Developer
+.mr.developer.cfg
+
+######################################################################
+# C++ ignore patterns
+######################################################################
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
